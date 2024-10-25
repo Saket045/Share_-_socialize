@@ -37,7 +37,7 @@ console.log(inputData);
             localStorage.setItem('chatapp',JSON.stringify(data))
             setAuthUser(data)
             setLoading(false)
-            navigate('/login')
+            navigate('/')
         } catch (error) {
             setLoading(false)
             console.log(error);
@@ -46,7 +46,7 @@ console.log(inputData);
     }
 
     return (
-        <div className='flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-purple-500'>
+        <div className='flex items-center justify-center '>
             <div className='w-full max-w-xl p-8 bg-white rounded-lg shadow-lg'>
                 <h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>
                     Register <span className='text-blue-600'>Chatters</span>

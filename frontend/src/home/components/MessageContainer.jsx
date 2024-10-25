@@ -82,9 +82,9 @@ const MessageContainer = ({ onBackUser }) => {
   return (
     <div className='md:min-w-[500px] h-full flex flex-col py-2'>
       {selectedConversation === null ? (
-        <div className='flex items-center justify-center w-full h-full bg-gray-100'>
-          <div className='px-4 text-center text-2xl text-gray-950 font-semibold flex flex-col items-center gap-2'>
-            <p className="text-2xl">Welcome!!👋 {authUser.username}😉</p>
+        <div className='flex items-center justify-center w-full h-full border border-white rounded-lg'>
+          <div className='px-4 text-center text-2xl text-white font-semibold flex flex-col items-center gap-2'>
+            <p className="text-2xl">Welcome!! {authUser.username}</p>
             <p className="text-lg">Select a chat to start messaging</p>
             <TiMessages className='text-6xl text-sky-600' />
           </div>
