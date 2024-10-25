@@ -8,8 +8,8 @@ try {
     const {messages} = req.body;
     const {id:reciverId} = req.params;
     const senderId = req.user._conditions._id;
-
-
+ 
+ 
     let chats = await Conversation.findOne({
         participants:{$all:[senderId , reciverId]}
     })

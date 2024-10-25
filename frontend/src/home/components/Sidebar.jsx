@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import axios from 'axios';
@@ -14,6 +16,7 @@ const Sidebar = ({ onSelectUser }) => {
     const navigate = useNavigate();
     const { authUser, setAuthUser } = useAuth();
     const { socket, onlineUser } = useSocketContext();
+    const [allChatters,setAllChatters] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [searchUser, setSearchuser] = useState([]);
     const [chatUser, setChatUser] = useState([]);
@@ -48,6 +51,7 @@ const Sidebar = ({ onSelectUser }) => {
         chatUserHandler()
     }, [])
     console.log(selectedConversation);
+
     //show user from the search result
     const handelSearchSubmit = async (e) => {
         e.preventDefault();
@@ -63,6 +67,7 @@ const Sidebar = ({ onSelectUser }) => {
             if (data.length === 0) {
                 toast.info("User Not Found")
             } else {
+                // const mainData=data.filter((user)=>user._id!==authUser._id)
                 setSearchuser(data)
             }
         } catch (error) {
@@ -93,10 +98,7 @@ const Sidebar = ({ onSelectUser }) => {
 
     //logout
     const handelLogOut = async () => {
-
-        const confirmlogout = window.prompt("type 'UserName' To LOGOUT");
-        if (confirmlogout === authUser.username) {
-            setLoading(true)
+       
             try {
                 const logout = await axios.post('/api/auth/logout')
                 const data = logout.data;
@@ -113,11 +115,7 @@ const Sidebar = ({ onSelectUser }) => {
                 setLoading(false)
                 console.log(error);
             }
-        } else {
-            toast.info("LogOut Cancelled")
-        }
-
-    }
+        } 
 
     return (
         <div className='h-full w-auto px-1'>
@@ -134,15 +132,15 @@ const Sidebar = ({ onSelectUser }) => {
                         <FaSearch />
                     </button>
                 </form>
-                <img
+                {/* <img
                     onClick={() => navigate(`/profile/${authUser?._id}`)}
                     src={authUser?.profilepic}
-                    className='self-center h-12 w-12 hover:scale-110 cursor-pointer' />
+                    className='self-center h-12 w-12 hover:scale-110 cursor-pointer' /> */}
             </div>
             <div className='divider px-3'></div>
             {searchUser?.length > 0 ? (
                 <>
-                    <div className="min-h-[70%] max-h-[80%] m overflow-y-auto scrollbar ">
+                    <div className="min-h-[70%] max-h-[80%] border-t border-gray-600 overflow-y-auto scrollbar py-4 ">
                         <div className='w-auto'>
                             {searchUser.map((user, index) => (
                                 <div key={user._id}>
@@ -150,17 +148,16 @@ const Sidebar = ({ onSelectUser }) => {
                                         onClick={() => handelUserClick(user)}
                                         className={`flex gap-3 
                                                 items-center rounded 
-                                                p-2 py-1 cursor-pointer
-                                                ${selectedUserId === user?._id ? 'bg-sky-500' : ''
-                                            } `}>
+                                                px-2 cursor-pointer
+                                               `}>
                                         {/*Socket is Online*/}
-                                        <div className={`avatar ${isOnline[index] ? 'online' : ''}`}>
+                                        <div className={`avatar ${isOnline[index] ? 'online' : 'offline'}`}>
                                             <div className="w-12 rounded-full">
                                                 <img src={user.profilepic} alt='user.img' />
                                             </div>
                                         </div>
                                         <div className='flex flex-col flex-1'>
-                                            <p className='font-bold text-gray-950'>{user.username}</p>
+                                            <p className='font-bold  text-white'>{user.username}</p>
                                         </div>
                                     </div>
                                     <div className='divider divide-solid px-3 h-[1px]'></div>
@@ -169,8 +166,8 @@ const Sidebar = ({ onSelectUser }) => {
                             )}
                         </div>
                     </div>
-                    <div className='mt-auto px-1 py-1 flex'>
-                        <button onClick={handSearchback} className='bg-white rounded-full px-2 py-1 self-center'>
+                    <div className='mt-auto px-1 flex '>
+                        <button onClick={handSearchback} className='bg-white rounded-full px-2 py-1  self-center'>
                             <IoArrowBackSharp size={25} />
                         </button>
 
@@ -178,62 +175,48 @@ const Sidebar = ({ onSelectUser }) => {
                 </>
             ) : (
                 <>
-                    <div className="min-h-[70%] max-h-[80%] m overflow-y-auto scrollbar ">
-                        <div className='w-auto'>
-                            {chatUser.length === 0 ? (
-                                <>
-                                    <div className='font-bold items-center flex flex-col text-xl text-yellow-500'>
-                                        <h1>Why are you Alone!!🤔</h1>
-                                        <h1>Search username to chat</h1>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    {chatUser.map((user, index) => (
-                                        <div key={user._id}>
-                                            <div
-                                                onClick={() => handelUserClick(user)}
-                                                className={`flex gap-3 
-                                                items-center rounded 
-                                                p-2 py-1 cursor-pointer
-                                                ${selectedUserId === user?._id ? 'bg-sky-500' : ''
-                                                    } `}>
+    <div className="max-h-[90%] overflow-y-auto scrollbar">
+        <div className='w-auto'>
+            
+            {chatUser.map((user, index) => (
+                <div key={user._id}>
+                    <div
+                        onClick={() => handelUserClick(user)}
+                        className={`flex gap-3 
+                        items-center rounded 
+                        p-2 py-1 cursor-pointer
+                        ${selectedUserId === user?._id ? 'bg-sky-500' : ''}`}>
+                        
+                        {/* Socket is Online */}
+                        <div className={`avatar ${isOnline[index] ? 'online' : 'offline'}`}>
+                            <div className="w-12 rounded-full">
+                                <img src={user.profilepic} alt='user.img' />
+                            </div>
+                        </div>
+                        <div className='flex flex-col flex-1'>
+                            <p className='font-bold text-white'>{user.username}</p>
+                        </div>
 
-                                                {/*Socket is Online*/}
-                                                <div className={`avatar ${isOnline[index] ? 'online' : ''}`}>
-                                                    <div className="w-12 rounded-full">
-                                                        <img src={user.profilepic} alt='user.img' />
-                                                    </div>
-                                                </div>
-                                                <div className='flex flex-col flex-1'>
-                                                    <p className='font-bold text-gray-950'>{user.username}</p>
-                                                </div>
-
-                                                <div>
-                                                    {selectedConversation === null && 
-                                                    newMessageUsers.reciverId === authUser._id  
-                                                    && newMessageUsers.senderId === user._id ? 
-                                                    <div className="rounded-full bg-green-700 text-sm text-white px-[4px]">+1
-                                                    </div>
-                                                    :
-                                                    <></>}
-                                                </div>
-                                            </div>
-                                            <div className='divider divide-solid px-3 h-[1px]'></div>
-                                        </div>
-                                    )
-                                    )}
-                                </>
-                            )}
+                        <div>
+                            {selectedConversation === null && 
+                            newMessageUsers.reciverId === authUser._id &&  
+                            newMessageUsers.senderId === user._id ? 
+                            <div className="rounded-full bg-green-700 text-sm text-white px-[4px]">+1</div>
+                            : null}
                         </div>
                     </div>
-                    <div className='mt-auto px-1 py-1 flex'>
-                        <button onClick={handelLogOut} className='hover:bg-red-600  w-10 cursor-pointer hover:text-white rounded-lg'>
-                            <BiLogOut size={25} />
-                        </button>
-                        <p className='text-sm py-1'>Logout</p>
-                    </div>
-                </>
+                    <div className='divider divide-solid px-3 h-[1px]'></div>
+                </div>
+            ))}
+        </div>
+    </div>
+    <div className='mt-auto px-1 py-1 flex'>
+        <button onClick={handelLogOut} className='text-white w-10 cursor-pointer rounded-lg ' >
+            <BiLogOut size={25} />
+        </button>
+        <p className='text-sm py-1 text-white'>Logout</p>
+    </div>
+</>
             )}
         </div>
     )

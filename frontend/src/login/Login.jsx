@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -12,14 +13,14 @@ const Login = () => {
     const [userInput, setUserInput] = useState({});
     const [loading, setLoading] = useState(false)
 
-    const handelInput = (e) => {
+    const handleInput = (e) => {
         setUserInput({
             ...userInput, [e.target.id]: e.target.value
         })
     }
     console.log(userInput);
 
-    const handelSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true)
         try {
@@ -41,62 +42,53 @@ const Login = () => {
         }
     }
     return (
-        <div className='flex flex-col items-center justify-center mix-w-full mx-auto'>
-            <div className='w-full p-6 rounded-lg shadow-lg
-          bg-gray-400 bg-clip-padding
-           backderop-filter backdrop-blur-lg bg-opacity-0'>
-                <h1 className='text-3xl font-bold text-center text-gray-300'>Login
-                    <span className='text-gray-950'> Chatters </span>
-                    </h1>
-                    <form onSubmit={handelSubmit} className='flex flex-col text-black'>
-                        <div>
-                            <label className='label p-2' >
-                                <span className='font-bold text-gray-950 text-xl label-text'>Email :</span>
-                            </label>
-                            <input
-                                id='email'
-                                type='email'
-                                onChange={handelInput}
-                                placeholder='Enter your email'
-                                required
-                                className='w-full input input-bordered h-10' />
-                        </div>
-                        <div>
-                            <label className='label p-2' >
-                                <span className='font-bold text-gray-950 text-xl label-text'>Password :</span>
-                            </label>
-                            <input
-                                id='password'
-                                type='password'
-                                onChange={handelInput}
-                                placeholder='Enter your password'
-                                required
-                                className='w-full input input-bordered h-10' />
-                        </div>
-                        <button type='submit'
-                            className='mt-4 self-center 
-                            w-auto px-2 py-1 bg-gray-950 
-                            text-lg hover:bg-gray-900 
-                            text-white rounded-lg hover: scale-105'>
-                           {loading ? "loading..":"Login"}
-                            </button>
-                    </form>
-                    <div className='pt-2'>
-                        <p className='text-sm font-semibold
-                         text-gray-800'>
-                            Don't have an Acount ? <Link to={'/register'}>
-                                <span
-                                    className='text-gray-950 
-                            font-bold underline cursor-pointer
-                             hover:text-green-950'>
-                                    Register Now!!
-                                </span>
-                            </Link>
-                        </p>
+        <div className='flex items-center justify-center '>
+            <div className='w-full max-w-lg p-8 bg-white rounded-lg shadow-lg'>
+                <h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>
+                    Login <span className='text-blue-600'>Chatters</span>
+                </h1>
+                <form onSubmit={handleSubmit} className='space-y-4'>
+                    <div>
+                        <label className='block text-gray-700 font-semibold mb-1'>Email:</label>
+                        <input
+                            id='email'
+                            type='email'
+                            onChange={handleInput}
+                            placeholder='Enter your email'
+                            required
+                            className='w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        />
                     </div>
+                    <div>
+                        <label className='block text-gray-700 font-semibold mb-1'>Password:</label>
+                        <input
+                            id='password'
+                            type='password'
+                            onChange={handleInput}
+                            placeholder='Enter your password'
+                            required
+                            className='w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                        />
+                    </div>
+                    <button
+                        type='submit'
+                        className='w-full py-2 mt-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition duration-200'
+                    >
+                        {loading ? "Loading..." : "Login"}
+                    </button>
+                </form>
+                <div className='pt-4 text-center'>
+                    <p className='text-sm font-semibold text-gray-700'>
+                        Don't have an account? 
+                        <Link to={'/register'} className='text-blue-600 font-bold underline ml-1'>
+                            Register Now!
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Login
+
