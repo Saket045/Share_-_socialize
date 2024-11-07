@@ -31,7 +31,7 @@ try {
 
 export const getCorrentChatters=async(req,res)=>{
     try {
-        const currentUserID = req.user._conditions._id;
+        const currentUserID = req.user._id;
         const currenTChatters = await Conversation.find({
             participants:currentUserID
         }).sort({
@@ -54,19 +54,6 @@ export const getCorrentChatters=async(req,res)=>{
             res.status(200).send(users)
 
     } catch (error) {
-        res.status(500).send({
-            success: false,
-            message: error
-        })
-        console.log(error);
-    }
-}
-export const getAllUsers=async(req,res)=>{
-    try{
-        const users = await User.find().select("username");
-        res.status(200).send(users)
-    }
-    catch (error) {
         res.status(500).send({
             success: false,
             message: error
