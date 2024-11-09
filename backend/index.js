@@ -5,11 +5,11 @@ import authRouter from  './rout/authUser.js'
 import messageRouter from './rout/messageRout.js'
 import userRouter from './rout/userRout.js'
 import cookieParser from "cookie-parser";
-import path from "path";
+// import path from "path";
 import {app , server} from './Socket/socket.js'
 import cors from "cors"
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 dotenv.config();
 
@@ -21,11 +21,11 @@ app.use('/api/auth',authRouter)
 app.use('/api/message',messageRouter)
 app.use('/api/user',userRouter)
 
-app.use(express.static(path.join(__dirname,"/frontend/dist")))
+// app.use(express.static(path.join(__dirname,"/frontend/dist")))
 
-app.get("*",(req,res)=>{
-    res.sendFile(path.join(__dirname,"frontend","dist","index.html"))
-})
+// app.get("*",(req,res)=>{
+//     res.sendFile(path.join(__dirname,"frontend","dist","index.html"))
+// })
 
 const PORT = process.env.PORT || 3000
 
