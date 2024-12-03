@@ -49,7 +49,7 @@ console.log(inputData);
         <div className='flex items-center justify-center '>
             <div className='w-full max-w-xl p-8 bg-white rounded-lg shadow-lg'>
                 <h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>
-                    Register <span className='text-blue-600'>Chatters</span>
+                    Register
                 </h1>
                 <form onSubmit={handelSubmit} className='space-y-4'>
                     <div>
