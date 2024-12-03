@@ -107,7 +107,7 @@ const Sidebar = ({ onSelectUser }) => {
                     console.log(data?.message);
                 }
                 toast.info(data?.message)
-                localStorage.removeItem('chatapp')
+                localStorage.removeItem('token')
                 setAuthUser(null)
                 setLoading(false)
                 navigate('/login')
