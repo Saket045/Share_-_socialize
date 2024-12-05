@@ -210,7 +210,7 @@ const Sidebar = ({ onSelectUser }) => {
         <button onClick={handelLogOut} className='text-white w-10 cursor-pointer rounded-lg ' >
             <BiLogOut size={25} />
         </button>
-        <p className='text-sm py-1 text-white'>Logout</p>
+        <p className='text-md py-1 text-white'>@{authUser.username}</p>
     </div>
 </>
             )}
