@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Login from "./login/Login.jsx"
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,8 +14,8 @@ function App() {
     <>
     <div className="p-2 w-screen h-screen flex items-center justify-center">
       <Routes>
-        <Route path="/login"  element={authUser ? <Home/>:<Navigate to="/login"/>}/>
-        <Route path="/register"element={authUser ? <Home/>:<Navigate to="/register"/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/register" element={<Register/>}/>
         <Route element={<VerifyUser/>}>
         <Route path="/" element={<Home/>}/>
         </Route>
