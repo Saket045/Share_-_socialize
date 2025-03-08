@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useEffect, useRef, useState } from 'react'
 import userConversation from '../../Zustan/userConversation';
 import { useAuth } from '../../context/AuthContext';

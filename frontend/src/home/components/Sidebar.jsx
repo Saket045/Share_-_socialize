@@ -109,6 +109,7 @@ const Sidebar = ({ onSelectUser }) => {
                 toast.info(data?.message)
                 localStorage.removeItem('token')
                 setAuthUser(null)
+                userConversation.getState().resetConversation();
                 setLoading(false)
                 navigate('/login')
             } catch (error) {

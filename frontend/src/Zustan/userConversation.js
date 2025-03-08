@@ -1,10 +1,11 @@
-import { create } from 'zustand'
+import { create } from "zustand";
 
-const userConversation = create((set)=>({
-    selectedConversation : null,
-    setSelectedConversation:(selectedConversation)=>set({selectedConversation}),
-    message:[],
-    setMessages:(message)=>set({message})
+const userConversation = create((set) => ({
+  selectedConversation: null,
+  message: [],
+  setSelectedConversation: (selectedConversation) => set({ selectedConversation }),
+  setMessages: (message) => set({ message }),
+  resetConversation: () => set({ selectedConversation: null, message: [] }) // Reset state
 }));
+
 export default userConversation;
-//youtube 

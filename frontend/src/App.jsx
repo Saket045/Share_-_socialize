@@ -10,12 +10,13 @@ import { useAuth } from "./context/AuthContext.jsx";
 import { Navigate } from "react-router-dom";
 function App() {
   const {authUser}=useAuth();
+  const token = localStorage.getItem('token');
   return (
     <>
     <div className="p-2 w-screen h-screen flex items-center justify-center">
       <Routes>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/register" element={<Register/>}/>
+      <Route path="/login" element={!token ? <Login/>:<Navigate to={"/"}/>}/>
+      <Route path="/register" element={!token ? <Register/>:<Navigate to={"/"}/>}/>
         <Route element={<VerifyUser/>}>
         <Route path="/" element={<Home/>}/>
         </Route>

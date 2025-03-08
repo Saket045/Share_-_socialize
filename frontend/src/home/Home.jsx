@@ -41,7 +41,7 @@ const Home = () => {
         border-l border-gray-300 mx-4`}
       ></div>
   
-      <div className={`flex-auto transition-opacity duration-300 ${selectedUser ? '' : 'hidden md:flex'} bg-[#040424] rounded-lg`}>
+      <div className={`flex-auto transition-opacity duration-300 ${selectedUser ? '' : 'hidden md:flex'} bg-[#01010f] rounded-lg`}>
         <MessageContainer onBackUser={handleShowSidebar} />
       </div>
     </div>
